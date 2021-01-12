@@ -14,7 +14,7 @@ class CreateReactionTable extends Migration
     public function up()
     {
         Schema::create('reaction', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->bigInteger('user_id')->default(0);
             $table->bigInteger('post_id')->default(0);
             $table->integer('type')->default(0);

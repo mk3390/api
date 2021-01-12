@@ -14,7 +14,7 @@ class CreateBlockTable extends Migration
     public function up()
     {
         Schema::create('block', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->bigInteger('blocked_user')->default(0);
             $table->bigInteger('blocked_by')->default(0);
             $table->boolean('deleted')->default(false);

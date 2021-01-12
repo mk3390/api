@@ -14,7 +14,7 @@ class CreateTimelineTable extends Migration
     public function up()
     {
         Schema::create('timeline', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->bigInteger('user_id')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
