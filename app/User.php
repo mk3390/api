@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Follow;
+use App\Models\Timeline;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -38,67 +40,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-    public function favorite()
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
-    public function settings()
-    {
-        return $this->hasOne(Setting::class);
-    }
     public function timeline()
     {
         return $this->hasOne(Timeline::class);
     }
-    public function block()
+
+    public function follower()
     {
-        return $this->hasMany(Block::class);
+        return $this->hasMany(Follow::class, 'id', 'following_to');
     }
 
-    public function loginActivity()
+    public function following()
     {
-        return $this->hasMany(loginActivity::class);
-    }
-    public function activity()
-    {
-        return $this->hasMany(Activity::class);
-    }
-
-    public function privacy()
-    {
-        return $this->hasOne(Privacy::class);
-    }
-    public function statusGroup()
-    {
-        return $this->hasMany(StatusGroup::class);
-    }
-    public function notificationSetting()
-    {
-        return $this->hasOne(NotificationSetting::class);
-    }
-    public function notification()
-    {
-        return $this->hasMany(Notification::class);
-    }
-
-    public function timelinePost()
-    {
-        $users = $this->followings()->pluck('to_user_id');
-        $users[]=  (auth()->check())?auth()->user()->id:0;
-        return $posts = Post::whereIn('user_id',$users);
-    }
-    public function isBlock($user)
-    {
-        $block = Block::where('blocked_by',auth()->user()->id)->where('user_id',$user->id)->first();
-        if($block){
-            return true;
-        }
-        return false;
+        return $this->hasMany(Follow::class, 'id', 'followed_by');
     }
 
 }
