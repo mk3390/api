@@ -8,6 +8,13 @@ class Comment extends Model
 {
     protected $data = [];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['post_id', 'comment', 'user_id', 'is_active', 'deleted'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

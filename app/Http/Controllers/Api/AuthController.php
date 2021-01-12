@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use Validator;
 use App\Models\User;
+use App\Models\Timeline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,7 @@ class AuthController extends ResponseController
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
+        $timeline = Timeline::create(['user_id'=>$user->id]);
         if($user){
             $success['user'] =  $user;
             $success['token'] =  $user->createToken('token')->accessToken;

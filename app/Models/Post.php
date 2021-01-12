@@ -8,6 +8,13 @@ class Post extends Model
 {
     protected $data = [];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [ 'timeline_id', 'user_id', 'post', 'type', 'is_active', 'post_id', 'is_repost', 'is_draft', 'deleted'];
+
     public function timeline()
     {
         return $this->belongsTo(Timeline::class);

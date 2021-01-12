@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Follow extends Model
 {
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [ 'followed_by', 'following_to', 'status'];
+
     public function follower()
     {
         return $this->belongsTo(User::class, 'followed_by', 'id');
