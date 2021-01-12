@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 
+use Validator;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Api\ResponseController as ResponseController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use Validator;
+use App\Http\Controllers\Api\ResponseController as ResponseController;
 
 class AuthController extends ResponseController
 {
