@@ -20,7 +20,7 @@ class Comment extends Model
 
     public function validate($request)
     {
-        $this->data = $request;
+        $this->data = $request->all();
     }
 
     public function store()
