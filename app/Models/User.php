@@ -3,16 +3,16 @@
 namespace App\Models;
 
 use Laravel\Passport\HasApiTokens;
-use Illuminate\Auth\Authenticatable;
-use Laravel\Lumen\Auth\Authorizable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;;
+
+class User extends Authenticatable
 {
-    use Authenticatable, Authorizable, HasFactory, HasApiTokens;
+    use  HasApiTokens , Notifiable;
 
     /**
      * The attributes that are mass assignable.
